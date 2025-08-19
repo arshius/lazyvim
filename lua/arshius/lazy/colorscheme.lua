@@ -5,6 +5,12 @@ function ColorSchemes(color)
 	--vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 	--vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 	
+	--vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
+	--vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+	--vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none" })
+	--vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "none" })
+	--vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = "none" })
+
 	print("changed color scheme")
 end
 
@@ -15,19 +21,17 @@ return {
 		config = function()
 			require("rose-pine").setup({
 				highlight_groups = {
-					Normal = { bg = "none" },
-					NormalFloat = { bg = "none" },
-					TelescopeBorder = { fg = "highlight_high", bg = "none" },
-					TelescopeNormal = { bg = "none" },
-					TelescopePromptNormal = { bg = "base" },
-					TelescopeResultsNormal = { fg = "subtle", bg = "none" },
-					TelescopeSelection = { fg = "text", bg = "base" },
-					TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
+					--Normal = { bg = "none" },
+					--NormalFloat = { bg = "none" },
+					--TelescopeBorder = { fg = "highlight_high", bg = "none" },
+					--TelescopeNormal = { bg = "none" },
+					--TelescopePromptNormal = { bg = "none" },
+					--TelescopeResultsNormal = { fg = "subtle", bg = "none" },
 				},
-				--	disable_background = true,
+				disable_background = true,
 			})
-			vim.cmd('colorscheme rose-pine')
-			--ColorSchemes()
+			--vim.cmd('colorscheme rose-pine')
+			ColorSchemes()
 		end
 	},
 }
