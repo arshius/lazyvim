@@ -1,5 +1,3 @@
-
-print("arshius.lazy init.lua loaded successfully")
 return {
 
     {

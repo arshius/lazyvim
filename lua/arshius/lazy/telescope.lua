@@ -5,11 +5,7 @@ return {
 		dependencies = { 'nvim-lua/plenary.nvim' },
 
 		config = function()
-			require('telescope').setup({
-				defaults = {
-					winblend = 0,
-				}
-			})
+			require('telescope').setup({})
 			local builtin = require('telescope.builtin')
 			vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = 'Find Files' })
 			vim.keymap.set('n', '<C-p>', builtin.git_files, {})
@@ -35,4 +31,5 @@ return {
 			require('telescope').load_extension('fzf')
 		end,
 	},
+
 }
