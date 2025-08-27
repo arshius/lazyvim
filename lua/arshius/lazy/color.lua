@@ -1,18 +1,12 @@
 function ColorMyVim(color)
-	color = color or "rose-pine"
+	color = color or "rose-pine-moon"
 	vim.cmd.colorscheme(color)
 
-	vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-	vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
-	
-	--vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
-	--vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
-	--vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none" })
-	--vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "none" })
-	--vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = "none" })
+	--vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+	--vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 end
 
-return {	
+return {
     {
         "erikbackman/brightburn.vim",
     },
@@ -81,22 +75,34 @@ return {
 		config = function()
 			require("rose-pine").setup({
 				highlight_groups = {
-					--Normal = { bg = "none" },
-					--NormalFloat = { bg = "none" },
-					--TelescopeBorder = { fg = "highlight_high", bg = "none" },
-					--TelescopeNormal = { bg = "none" },
-					--TelescopePromptNormal = { bg = "none" },
-					--TelescopeResultsNormal = { fg = "subtle", bg = "none" },
+                    TelescopeBorder = { fg = "highlight_high", bg = "none" },
+                    TelescopeNormal = { bg = "none" },
+                    TelescopePromptNormal = { bg = "none" },
+                    TelescopeResultsNormal = { fg = "subtle", bg = "none" },
+                    TelescopeSelection = { fg = "text", bg = "none" },
+                    TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
 				},
-				disable_background = true,
+				--disable_background = true, -- changed to styles.transparency
+                --disable_float_background = true, -- changed to styles.transparency
                 styles = {
                     italic = false,
+                    transparency = true,
                 },
 			})
-			--vim.cmd('colorscheme rose-pine')
 			ColorMyVim()
 		end
 	},
+    {
+        "tiagovla/tokyodark.nvim",
+        opts = {
+            -- custom options here
+            transparent_background = true,
+        },
+        config = function(_, opts)
+            require("tokyodark").setup(opts) -- calling setup is optional
+            ColorMyVim()
+        end,
+    },
 }
 
 

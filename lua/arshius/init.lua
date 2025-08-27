@@ -12,8 +12,8 @@ autocmd('BufEnter', {
 	callback = function()
 		if vim.bo.filetype == "zig" then
 			pcall(vim.cmd.colorscheme, "tokyodark")
-		else
-			pcall(vim.cmd.colorscheme, "rose-pine-moon")
+		--else
+			--pcall(vim.cmd.colorscheme, "rose-pine-moon")
 		end
 	end
 })
