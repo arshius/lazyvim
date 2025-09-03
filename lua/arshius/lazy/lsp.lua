@@ -86,83 +86,59 @@ return {
 						vim.g.zig_fmt_autosave = 0
 					end,
 
-					["lua_ls"] = function ()
-						if vim.fn.has('nvim-0.11') == 0 then
-							local lspconfig = require("lspconfig")
-							lspconfig.lua_ls.setup {
-								capabilities = capabilities,
-								settings = {
-									Lua = {
-										format = {
-											enable = true,
-											defaultConfig = {
-												indent_style = "space",
-												indent_size = "2",
-											},
-										},
-									},
-								},
-							}
-						else
-							vim.lsp.config("lua_ls", {
-								capabilities = capabilities,
-								settings = {
-									Lua = {
-										format = {
-											enable = true,
-											defaultConfig = {
-												indent_style = "space",
-												indent_size = "2",
-											},
-										},
-									},
-								},
-							})
-						end
-					end,
+                    ["lua_ls"] = function ()
+                        local opts = {
+                            capabilities = capabilities,
+                            settings = {
+                                Lua = {
+                                    diagnostics = {
+                                        global = { 'vim' },
+                                    },
+                                    format = {
+                                        enable = true,
+                                        defaultConfig = {
+                                            indent_style = "space",
+                                            indent_size = "2",
+                                        },
+                                    },
+                                },
+                            },
+                        }
+                        if vim.fn.has('nvim-0.11') == 0 then
+                            local lspconfig = require("lspconfig")
+                            lspconfig.lua_ls.setup(opts)
+                        else
+                            vim.lsp.config("lua_ls", opts)
+                        end
+                    end,
 
-					["tailwindcss"] = function ()
-						if vim.fn.has('nvim-0.11') == 0 then
-							local lspconfig = require("lspconfig")
-							lspconfig.tailwindcss.setup({
-								capabilities = capabilities,
-								filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
-								settings = {
-									tailwindCSS = {
-										experimental = {
-											classRegex = {
-												"tw`([^`]*)",
-												"tw=\"([^\"]*)",
-												"tw={\"([^\"}]*)",
-												"tw\\.\\w+`([^`]*)",
-												"tw\\(.*?\\)`([^`]*)",
-											},
-										},
-									},
-								},
-							})
-						else
-							vim.lsp.config("tailwindcss", {
-								capabilities = capabilities,
-								filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
-								settings = {
-									tailwindCSS = {
-										experimental = {
-											classRegex = {
-												"tw`([^`]*)",
-												"tw=\"([^\"]*)",
-												"tw={\"([^\"}]*)",
-												"tw\\.\\w+`([^`]*)",
-											"tw\\(.*?\\)`([^`]*)",
-											},
-										},
-									},
-								},
-							})
-						end
-					end,
-				},
-			})
+                    ["tailwindcss"] = function ()
+                        local opts = {
+                            capabilities = capabilities,
+                            filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
+                            settings = {
+                                tailwindCSS = {
+                                    experimental = {
+                                        classRegex = {
+                                            "tw`([^`]*)",
+                                            "tw=\"([^\"]*)",
+                                            "tw={\"([^\"}]*)",
+                                            "tw\\.\\w+`([^`]*)",
+                                            "tw\\(.*?\\)`([^`]*)",
+                                        },
+                                    },
+                                },
+                            },
+                        }
+                        if vim.fn.has('nvim-0.11') == 0 then
+                            local lspconfig = require("lspconfig")
+                            lspconfig.tailwindcss.setup(opts)
+                        else
+                            vim.lsp.config("tailwindcss", opts)
+                        end
+                    end,
+                },
+            })
 
 			local cmp = require("cmp")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -187,6 +163,7 @@ return {
 				})
 			})
 			vim.diagnostic.config({
+                virtual_text = true,
 				-- update_in_insert = true,
 				float = {
 					focusable = false,
