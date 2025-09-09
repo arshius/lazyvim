@@ -37,11 +37,6 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"lua_ls",
-					"rust_analyzer",
-					"gopls",
-					"tailwindcss",
-					"angularls",
-					"zls",
 				},
 				handlers = {
 					function (server_name)
@@ -54,36 +49,6 @@ return {
 								capabilities = capabilities
 							})
 						end
-					end,
-
-					zls = function ()
-						if vim.fn.has('nvim-0.11') == 0 then
-							local lspconfig = require("lspconfig")
-							lspconfig.zls.setup({
-								root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
-								settings = {
-									zls = {
-										enable_inlay_hints = true,
-										enable_snippets = true,
-										warn_style = true,
-									},
-								},
-							})
-						else
-							vim.lsp.config("zls", {
-								root_dir = vim.lsp.config.util.root_pattern(".git", "build.zig", "zls.json"),
-								settings = {
-									zls = {
-										enable_inlay_hints = true,
-										enable_snippets = true,
-										warn_style = true,
-									},
-								},
-							})
-						end
-
-						vim.g.zig_fmt_parse_errors = 0
-						vim.g.zig_fmt_autosave = 0
 					end,
 
                     ["lua_ls"] = function ()
@@ -109,32 +74,6 @@ return {
                             lspconfig.lua_ls.setup(opts)
                         else
                             vim.lsp.config("lua_ls", opts)
-                        end
-                    end,
-
-                    ["tailwindcss"] = function ()
-                        local opts = {
-                            capabilities = capabilities,
-                            filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
-                            settings = {
-                                tailwindCSS = {
-                                    experimental = {
-                                        classRegex = {
-                                            "tw`([^`]*)",
-                                            "tw=\"([^\"]*)",
-                                            "tw={\"([^\"}]*)",
-                                            "tw\\.\\w+`([^`]*)",
-                                            "tw\\(.*?\\)`([^`]*)",
-                                        },
-                                    },
-                                },
-                            },
-                        }
-                        if vim.fn.has('nvim-0.11') == 0 then
-                            local lspconfig = require("lspconfig")
-                            lspconfig.tailwindcss.setup(opts)
-                        else
-                            vim.lsp.config("tailwindcss", opts)
                         end
                     end,
                 },

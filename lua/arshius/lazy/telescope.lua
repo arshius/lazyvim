@@ -26,13 +26,4 @@ return {
 			vim.keymap.set('n', '<leader>vh', builtin.help_tags, { desc = 'View Help' })
 		end
 	},
-
-	{ 
-		'nvim-telescope/telescope-fzf-native.nvim', 
-		build = 'make',
-		config = function()
-			require('telescope').load_extension('fzf')
-		end,
-	},
-
 }
