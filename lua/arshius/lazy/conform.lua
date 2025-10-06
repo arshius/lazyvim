@@ -5,8 +5,8 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				go = { "gofmt" },
-				javascript = { "prettier" },
-				typescript = { "prettier" },
+				javascript = { "prettierd" },
+				typescript = { "prettierd" },
 	--			elixir = { "mix" }
 			}
 		})
